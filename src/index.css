@@ -70,9 +70,6 @@
 
 html, #root {
   @apply bg-neutral-100 !important;
-  background-image: url("archbtw.jpg");
-  background-size: cover;
-  background-repeat: repeat;
 }
 
 

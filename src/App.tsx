@@ -1,10 +1,63 @@
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import React, { useState } from "react";
+import { UrlData, ApiRespose} from "src/types/types.ts"
+
 
 
 
 function App() {
+  const [url, setUrl] = useState("")
+  const [shortUrl, setShortUrl] = useState("")
+  const [loading, setLoading] = useState(false)
+  const baseUrl = "http://archbtw.site"
+
+  async function createFreeUrl(url:string){
+    setLoading(true)
+    try{
+      const response = await fetch("https://archbtw.site/api/newfreeurl", {
+        method: "POST",
+        body: JSON.stringify({address: url})
+      })
+      if(!response.ok){
+        alert("there was an error")
+      }
+      const textRes:string = await response.text()
+      const urlParsed:UrlData = JSON.parse(textRes)
+      setShortUrl(urlParsed.short_url)
+    }
+    catch(error){
+      console.log(error)
+      setLoading(false)
+    }
+  }
+  const ShowUrl:React.FC =()=>{
+    return(
+      <div>
+        {loading ? (
+            <div className="w-40 h-40">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <circle fill="#000000" stroke="#000000" strokeWidth="15" r="15" cx="40" cy="100">
+                  <animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate>
+                </circle>
+                <circle fill="#000000" stroke="#000000" strokeWidth="15" r="15" cx="100" cy="100">
+                  <animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate>
+                </circle>
+                <circle fill="#000000" stroke="#000000" strokeWidth="15" r="15" cx="160" cy="100">
+                  <animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate>
+                </circle>
+              </svg>
+            </div>
+          ) : (
+            <div>
+              <span>Your shortened url is {`${baseUrl}/${shortUrl}`}</span>
+            </div>
+          )}
+      </div>
+    )
+  }
+
   return (
     <div className="flex justify-center flex-col items-center pt-8">
       <h1 className="font-extrabold text-3xl font-mono font text-center px-2">Want to tell everyone you use Arch (btw)?</h1>
@@ -12,8 +65,17 @@ function App() {
       <div id="formurl">
         <Card className="p-6 m-6 w-[600px]  ">
           <div className="flex pb-4">
-          <Input className="h-14"/>
-            <Button className="h-14">Shorten</Button>
+          <Input 
+          value={url}
+          className="h-14"
+          onChange={(e)=> setUrl(e.target.value)}/>
+            <Button 
+            className="h-14"
+            onClick={()=>{createFreeUrl(url)}}
+            >Shorten</Button>
+          </div>
+          <div className="flex justify-center items-center">
+          <ShowUrl/>
           </div>
           <span className="text-lg font-mono ">
           URLBIT is a free tool to shorten URLs and at the same time  and most important tell everyone you use Arch (btw)
@@ -23,7 +85,12 @@ function App() {
         <Card className="p-6 m-6 w-[600px]  ">
         <h1 className="font-extrabold text-2xl pb-2 font-mono">Want more ?</h1>
         <div className="text-lg font-mono">
-        <span className="pb-2">You can<Button className="text-slate-700 text-lg font-mono" variant={"link"}>create an account</Button>and manage your urls</span>
+        <span className="pb-2">You can
+        <Button
+        className="text-slate-700 text-lg font-mono"
+        variant={"link"}>create an account
+
+        </Button>and manage your urls</span>
         <br />
         <span>You will be able to:</span>
         <span> <br />-Check how many people has clicked your URLS
