@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import React, { useState } from "react";
+import { useState } from "react";
 import {ApiResponse} from "src/types/types.ts"
 
 
@@ -90,7 +90,8 @@ function App() {
         <span className="pb-2">You can
         <Button
         className="text-slate-700 text-lg font-mono"
-        variant={"link"}>create an account
+        variant={"link"}>
+          <a href="/register">create an account</a>
 
         </Button>and manage your urls</span>
         <br />
