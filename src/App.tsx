@@ -38,14 +38,16 @@ function App() {
   }
 
   return (
-    <div className="flex justify-center flex-col items-center pt-8">
+    <div className="">
+      <div className="flex justify-center flex-col items-center pt-8 ">
       <h1 className="font-extrabold text-3xl font-mono font text-center px-2">Want to tell everyone you use Arch (btw)?</h1>
       <h1 className="font-extrabold text-3xl font-mono">We got you</h1>
       <div id="formurl">
-        <Card className="p-6 m-6 w-[600px]  ">
+        <Card className="p-6 m-6 max-w-[600px]  ">
           <div className="flex pb-4">
           <Input 
           value={url}
+          placeholder="https://example.com"
           className="h-14"
           onChange={(e)=> setUrl(e.target.value)}/>
             <Button 
@@ -84,7 +86,7 @@ function App() {
           
           </span>
         </Card>
-        <Card className="p-6 m-6 w-[600px]  ">
+        <Card className="p-6 m-6 max-w-[600px]  ">
         <h1 className="font-extrabold text-2xl pb-2 font-mono">Want more ?</h1>
         <div className="text-lg font-mono">
         <span className="pb-2">You can
@@ -103,6 +105,7 @@ function App() {
         </div>
         </Card>
       </div>
+    </div>
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default function Register(){
                 <Input type="password"  className="pb-2"/>
                 <strong className="text-left pb-2 pt-2">Confirm Password:</strong>
                 <Input type="password" className="pb-2"/>
-                <Button  className="mt-6" variant={"default"}> Register</Button>
+                <Button disabled  className="mt-6" variant={"default"}> Register option available soon</Button>
             </Card>
         </div>
     )
