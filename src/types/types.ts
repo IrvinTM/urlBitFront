@@ -12,5 +12,5 @@ export type UrlData = {
   export type ApiResponse = {
     message: string;
     status: boolean;
-    url: UrlData;
+    url?: UrlData;
   };  

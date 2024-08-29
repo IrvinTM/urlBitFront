@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import React, { useState } from "react";
-import { UrlData, ApiRespose} from "src/types/types.ts"
+import {ApiResponse} from "src/types/types.ts"
 
 
 
@@ -16,46 +16,25 @@ function App() {
   async function createFreeUrl(url:string){
     setLoading(true)
     try{
-      const response = await fetch("https://archbtw.site/api/newfreeurl", {
+      const response = await fetch("http://localhost:3000/api/freeurl", {
         method: "POST",
         body: JSON.stringify({address: url})
       })
-      if(!response.ok){
-        alert("there was an error")
+      const  resText = await response.text()
+      const parsed:ApiResponse = await JSON.parse(resText)
+      if(!parsed.status){
+          alert(parsed.message)
+      }else{
+        setShortUrl(parsed.url?.short_url ?? "")
+        console.log("este es el short url del response ", parsed.url?.short_url)
+        console.log("este es el shorturl var ",shortUrl)
       }
-      const textRes:string = await response.text()
-      const urlParsed:UrlData = JSON.parse(textRes)
-      setShortUrl(urlParsed.short_url)
+      
     }
-    catch(error){
-      console.log(error)
-      setLoading(false)
+    catch(err){
+      console.log(err)
     }
-  }
-  const ShowUrl:React.FC =()=>{
-    return(
-      <div>
-        {loading ? (
-            <div className="w-40 h-40">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                <circle fill="#000000" stroke="#000000" strokeWidth="15" r="15" cx="40" cy="100">
-                  <animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate>
-                </circle>
-                <circle fill="#000000" stroke="#000000" strokeWidth="15" r="15" cx="100" cy="100">
-                  <animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate>
-                </circle>
-                <circle fill="#000000" stroke="#000000" strokeWidth="15" r="15" cx="160" cy="100">
-                  <animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate>
-                </circle>
-              </svg>
-            </div>
-          ) : (
-            <div>
-              <span>Your shortened url is {`${baseUrl}/${shortUrl}`}</span>
-            </div>
-          )}
-      </div>
-    )
+    setLoading(false)
   }
 
   return (
@@ -75,7 +54,30 @@ function App() {
             >Shorten</Button>
           </div>
           <div className="flex justify-center items-center">
-          <ShowUrl/>
+          <div>
+        {loading ? (
+            <div className="w-40 h-40">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <circle fill="#000000" stroke="#000000" strokeWidth="15" r="15" cx="40" cy="100">
+                  <animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate>
+                </circle>
+                <circle fill="#000000" stroke="#000000" strokeWidth="15" r="15" cx="100" cy="100">
+                  <animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate>
+                </circle>
+                <circle fill="#000000" stroke="#000000" strokeWidth="15" r="15" cx="160" cy="100">
+                  <animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate>
+                </circle>
+              </svg>
+            </div>
+          ) : (
+            <div>
+              
+            </div>
+          )}
+          {shortUrl && <div>
+            <span>Your shortened url is {`${baseUrl}/${shortUrl}`}</span>
+          </div> }
+      </div>
           </div>
           <span className="text-lg font-mono ">
           URLBIT is a free tool to shorten URLs and at the same time  and most important tell everyone you use Arch (btw)
