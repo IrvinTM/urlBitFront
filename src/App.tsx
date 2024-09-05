@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input"
 import { useState } from "react";
 import {ApiResponse} from "src/types/types.ts"
 import logo from "./assets/arch.png"
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -16,28 +18,42 @@ function App() {
 
   async function createFreeUrl(url:string){
     setLoading(true)
-    try{
-      const response = await fetch("https://archbtw.site/api/freeurl", {
-        method: "POST",
-        body: JSON.stringify({address: url})
-      })
-      const  resText = await response.text()
-      const parsed:ApiResponse = await JSON.parse(resText)
-      if(!parsed.status){
-          alert(parsed.message)
-      }else{
-        setShortUrl(parsed.url?.short_url ?? "")
-        console.log("este es el short url del response ", parsed.url?.short_url)
-        console.log("este es el shorturl var ",shortUrl)
+    if(isValidUrl(url)){
+      try{
+        const response = await fetch("https://archbtw.site/api/freeurl", {
+          method: "POST",
+          body: JSON.stringify({address: url})
+        })
+        const  resText = await response.text()
+        const parsed:ApiResponse = await JSON.parse(resText)
+        if(!parsed.status){
+            toast.error(parsed.message)
+        }else{
+          setShortUrl(parsed.url?.short_url ?? "")
+          console.log("este es el short url del response ", parsed.url?.short_url)
+          console.log("este es el shorturl var ",shortUrl)
+        }
+        
       }
-      
+      catch(err){
+        console.log(err)
+      }
     }
-    catch(err){
-      console.log(err)
+    else{
+      toast.error("Invalid Url")
+      setLoading(false)
+      return
     }
     setLoading(false)
   }
-
+  function isValidUrl(url:string) {
+    try {
+      new URL(url);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
   return (
     <div>
       <div className="flex justify-center flex-col items-center pt-8 ">
@@ -111,6 +127,19 @@ function App() {
         </Card>
       </div>
     </div>
+    <ToastContainer
+position="top-right"
+autoClose={1000}
+hideProgressBar
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+transition={Slide}
+/>
     </div>
   );
 }
