@@ -40,8 +40,12 @@ function App() {
   return (
     <div className="">
       <div className="flex justify-center flex-col items-center pt-8 ">
-      <h1 className="font-extrabold text-3xl font-mono font text-center px-2">Want to tell everyone you use Arch (btw)?</h1>
-      <h1 className="font-extrabold text-3xl font-mono">We got you</h1>
+      <div className="flex md:items-center">
+  <h1 className="font-extrabold text-3xl font-mono font text-center px-2 md:mb-0 mb-4 mt-1">Want to tell everyone you use</h1>
+  <img className="md:w-12 md:h-12 w-18 h-32 mb-2" src="/arch.png" alt="archlogo" />
+  <span className="font-extrabold text-3xl font-mono font text-center px-2 md:mt-0 mt-8">(btw)?</span>
+</div>
+      <h1 className="font-extrabold text-3xl text-[#0b9adb] font-mono">We got you</h1>
       <div id="formurl">
         <Card className="p-6 m-6 max-w-[600px]  ">
           <div className="flex pb-4">
@@ -51,7 +55,7 @@ function App() {
           className="h-14"
           onChange={(e)=> setUrl(e.target.value)}/>
             <Button 
-            className="h-14"
+            className="h-14 bg-[#0b9adb]"
             onClick={()=>{createFreeUrl(url)}}
             >Shorten</Button>
           </div>
@@ -76,12 +80,12 @@ function App() {
               
             </div>
           )}
-          {shortUrl && <div>
-            <span>Your shortened url is {`${baseUrl}/${shortUrl}`}</span>
+          {shortUrl && <div className="mt-2 mb-4">
+            <span>Your shortened url is <a target="_blank" className="text-[#0b9adb]" href={`${baseUrl}/${shortUrl}`}>{`${baseUrl}/${shortUrl}`}</a></span>
           </div> }
       </div>
           </div>
-          <span className="text-lg font-mono ">
+          <span className="text-lg font-mono">
           URLBIT is a free tool to shorten URLs and at the same time  and most important tell everyone you use Arch (btw)
           
           </span>
@@ -91,7 +95,7 @@ function App() {
         <div className="text-lg font-mono">
         <span className="pb-2">You can
         <Button
-        className="text-slate-700 text-lg font-mono"
+        className="text-[#0b9adb] text-lg font-mono"
         variant={"link"}>
           <a href="/register">create an account</a>
 

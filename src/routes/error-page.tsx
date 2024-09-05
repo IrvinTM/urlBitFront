@@ -17,10 +17,10 @@ export default function ErrorPage() {
   return (
     <div id="error-page" className="flex justify-center items-center pt-10">
       <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
+      <p>Sorry, an unexpected error has occurred. (arch btw) </p>
+        <div className="flex justify-center items-center content-center">
         <i>{errorMessage}</i>
-      </p>
+        </div>
     </div>
   );
 }
