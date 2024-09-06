@@ -6,9 +6,7 @@ import {ApiResponse} from "src/types/types.ts"
 import logo from "./assets/arch.png"
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
-
+import Bar from "./components/ui/Bar";
 
 function App() {
   const [url, setUrl] = useState("")
@@ -56,7 +54,8 @@ function App() {
   }
   return (
     <div>
-      <div className="flex justify-center flex-col items-center pt-8 ">
+      <Bar/>
+      <div className="flex justify-center flex-col items-center pt-8 dark:bg-slate-800">
       <div className="flex md:items-center flex-col md:flex-row content-center justify-center items-center">
   <h1 className="font-extrabold text-3xl font-mono font text-center px-2 md:mb-0">Want to tell everyone you use</h1>
   <img className="md:w-12 md:h-12 w-32 h-32 mb-2 md:mt-0 mt-2" src={logo} alt="archlogo" />
