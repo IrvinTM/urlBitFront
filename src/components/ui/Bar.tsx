@@ -8,12 +8,13 @@ export default function Bar() {
     <div>
       <header className="sticky top-0 z-50 w-full border-b bg-background shadow-sm transition-shadow duration-300 data-[scrolled=true]:shadow-md">
         <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-          <a href="#" className="flex items-center gap-2">
+          <a href="https://shortener.archbtw.site/" className="flex items-center gap-2">
             <MountainIcon className="h-6 w-6" />
           </a>
           <nav className="hidden lg:flex lg:gap-6 items-center">
             <a
-              href="#"
+              target="_blank"
+              href="https://github.com/IrvinTM"
               className="text-sm font-extrabold text-muted-foreground transition-colors hover:text-foreground"
             >
               Github
@@ -42,7 +43,8 @@ export default function Bar() {
             >
               <div className="grid gap-4">
                 <a
-                  href="#"
+                  target="_blank"
+                  href="https://github.com/IrvinTM"
                   className="text-sm text-center font-extrabold text-muted-foreground transition-colors hover:text-foreground"
                 >
                   Github
