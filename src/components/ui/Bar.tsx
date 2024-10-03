@@ -19,16 +19,6 @@ export default function Bar() {
             >
               Github
             </a>
-            <a
-              className="bg-[#0b9adb] text-white px-4 py-2 rounded-full"
-              href="https://www.buymeacoffee.com/IceSoldier"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-              className="w-[120px] h-[20px]"
-              src="https://downloads.intercomcdn.com/i/o/234105/0d29fbdf17e257cdfc2ba1ba/7103925065c5e9bd6ac7ac9efd453fd7.png" alt="" />
-            </a>
           </nav>
           <Sheet>
             <SheetTrigger asChild>
@@ -49,16 +39,6 @@ export default function Bar() {
                 >
                   Github
                 </a>
-                <a
-              className="bg-[#0b9adb] text-white px-4 py-2 rounded-full flex justify-center"
-              href="https://www.buymeacoffee.com/IceSoldier"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-              className="w-[120px] h-[20px]"
-              src="https://downloads.intercomcdn.com/i/o/234105/0d29fbdf17e257cdfc2ba1ba/7103925065c5e9bd6ac7ac9efd453fd7.png" alt="" />
-            </a>
               </div>
             </SheetContent>
           </Sheet>
